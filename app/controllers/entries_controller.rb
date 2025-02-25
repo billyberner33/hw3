@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
     if @place.nil?
       redirect_to "/places", alert: "Error: Place not found. Please select a valid place."
     else
-      @entry = Entry.new  # Initialize an entry
+      @entry = Entry.new
     end
   end
 
@@ -21,7 +21,7 @@ class EntriesController < ApplicationController
       redirect_to "/places/#{@entry.place_id}", notice: "Entry added successfully!"
     else
       flash[:alert] = "Error: Entry could not be saved. " + @entry.errors.full_messages.join(", ")
-      render :new  # Stay on the form if save fails
+      render :new
     end
   end
 end

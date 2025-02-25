@@ -9,17 +9,17 @@ class PlacesController < ApplicationController
   end
 
   def new
-    @place = Place.new  # Initialize a new place object
+    @place = Place.new  # Initialize a new place
   end
 
   def create
-    @place = Place.new(name: params[:name])  # Only assign name
+    @place = Place.new(name: params[:name])
 
     if @place.save
       redirect_to "/places", notice: "Place added successfully!"
     else
       flash[:alert] = "Error: Place could not be saved."
-      render :new  # Stay on the new form if there's an error
+      render :new
     end
   end
 end

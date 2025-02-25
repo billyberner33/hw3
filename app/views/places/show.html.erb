@@ -2,11 +2,15 @@
 
 <h2>Journal Entries</h2>
 <ul>
-  <% @entries.each do |entry| %>
-    <li>
-      <strong><%= entry.title %></strong> - <%= entry.posted_on %>
-      <p><%= entry.description %></p>
-    </li>
+  <% if @entries.any? %>
+    <% @entries.each do |entry| %>
+      <li>
+        <strong><%= entry.title %></strong> - <%= entry.posted_on %>
+        <p><%= entry.description %></p>
+      </li>
+    <% end %>
+  <% else %>
+    <p>No journal entries yet.</p>
   <% end %>
 </ul>
 
