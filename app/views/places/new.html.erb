@@ -2,8 +2,8 @@
 
 <%= form_with(model: @place, url: "/places", local: true) do |form| %>
   <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+    <%= form.label :name, "Place Name" %><br>
+    <%= form.text_field :name, name: "name", required: true %>
   </p>
 
   <p>

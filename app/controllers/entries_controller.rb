@@ -16,7 +16,7 @@ class EntriesController < ApplicationController
       posted_on: params[:posted_on],
       place_id: params[:place_id]
     )
-
+  
     if @entry.save
       redirect_to "/places/#{@entry.place_id}", notice: "Entry added successfully!"
     else

@@ -13,13 +13,15 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(name: params[:name])
-
+    @place = Place.new(name: params[:name])  # Ensure name is assigned correctly
+  
     if @place.save
       redirect_to "/places", notice: "Place added successfully!"
     else
-      flash[:alert] = "Error: Place could not be saved."
+      flash[:alert] = "Error: Place name cannot be blank."
       render :new
     end
   end
+  
+  
 end

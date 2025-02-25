@@ -4,7 +4,7 @@
   <% if @places.any? %>
     <% @places.each do |place| %>
       <li>
-        <%= link_to place.name, "/places/#{place.id}" %>
+        <%= link_to (place.name.present? ? place.name : "Unnamed Place"), "/places/#{place.id}" %>
       </li>
     <% end %>
   <% else %>

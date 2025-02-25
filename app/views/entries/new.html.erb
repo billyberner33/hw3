@@ -1,21 +1,22 @@
 <h1>New Entry for <%= @place&.name || "Unknown Place" %></h1>
 
 <%= form_with(model: @entry, url: "/entries", local: true) do |form| %>
+  <!-- Hidden field to associate entry with a place -->
   <%= form.hidden_field :place_id, value: @place.id %>
 
   <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.label :title, "Entry Title" %><br>
+    <%= form.text_field :title, name: "title", required: true %>
   </p>
 
   <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
+    <%= form.label :description, "Description" %><br>
+    <%= form.text_area :description, name: "description", required: true %>
   </p>
 
   <p>
-    <%= form.label :posted_on %><br>
-    <%= form.date_field :posted_on %>
+    <%= form.label :posted_on, "Date" %><br>
+    <%= form.date_field :posted_on, name: "posted_on", required: true %>
   </p>
 
   <p>
