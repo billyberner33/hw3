@@ -1,13 +1,27 @@
-<h1>Add a New Place</h1>
+<h1>New Entry for <%= @place&.name || "Unknown Place" %></h1>
 
-<%= form_with(url: "/places", local: true) do |form| %>
+<%= form_with(url: "/entries", local: true) do |form| %>
+  <!-- Hidden field to associate entry with a place -->
+  <%= form.hidden_field :place_id, value: @place.id %>
+
   <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
   </p>
+
   <p>
-    <%= form.submit "Save Place" %>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.label :posted_on %><br>
+    <%= form.date_field :posted_on %>
+  </p>
+
+  <p>
+    <%= form.submit "Save Entry" %>
   </p>
 <% end %>
 
-<%= link_to "Back to Places", "/places" %>
+<%= link_to "Back to Place", "/places/#{@place.id}" %>
