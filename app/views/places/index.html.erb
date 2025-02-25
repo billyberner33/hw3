@@ -1,0 +1,11 @@
+<h1>Places I've Visited</h1>
+<ul>
+  <% @places.each do |place| %>
+    <li>
+      <%= link_to place.name, "/places/#{place.id}" %>
+    </li>
+  <% end %>
+</ul>
+
+<!-- Add a button to the New Place form -->
+<%= link_to "Add New Place", "/places/new" %>

@@ -1,0 +1,13 @@
+<h1>Add a New Place</h1>
+
+<%= form_with(url: "/places", local: true) do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.submit "Save Place" %>
+  </p>
+<% end %>
+
+<%= link_to "Back to Places", "/places" %>
