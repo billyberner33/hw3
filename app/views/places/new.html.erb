@@ -1,27 +1,14 @@
-<h1>New Entry for <%= @place&.name || "Unknown Place" %></h1>
+<h1>Add a New Place</h1>
 
-<%= form_with(model: @entry, url: "/entries", local: true) do |form| %>
-
-  <%= form.hidden_field :place_id, value: @place.id %>
-
+<%= form_with(model: @place, url: "/places", local: true) do |form| %>
   <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
   </p>
 
   <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
-
-  <p>
-    <%= form.label :posted_on %><br>
-    <%= form.date_field :posted_on %>
-  </p>
-
-  <p>
-    <%= form.submit "Save Entry" %>
+    <%= form.submit "Save Place" %>
   </p>
 <% end %>
 
-<%= link_to "Back to Place", "/places/#{@place.id}" %>
+<%= link_to "Back to Places", "/places" %>
