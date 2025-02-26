@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  # Set the root path to the places index
   root "places#index"
 
-  get "/places", to: "places#index"
-  get "/places/new", to: "places#new"
-  post "/places", to: "places#create"
-  get "/places/:id", to: "places#show"
-
-  get "/entries/new", to: "entries#new"
-  post "/entries", to: "entries#create"
-
-  # Defines the root path route ("/")
-  # get("/", { :controller => "articles", :action => "index" })
+  # Places routes
+  resources :places do
+    # Nested routes for entries under places
+    resources :entries, only: [:new, :create]
+  end
 end

@@ -1,27 +1,39 @@
 class EntriesController < ApplicationController
-  def new
-    @place = Place.find_by(id: params[:place_id])
+  before_action :set_place, only: [:new, :create]
 
+  def new
     if @place.nil?
-      redirect_to "/places", alert: "Error: Place not found. Please select a valid place."
+      redirect_to places_path, alert: "Error: Place not found. Please select a valid place."
     else
-      @entry = Entry.new
+      @entry = @place.entries.build  
     end
   end
 
   def create
-    @entry = Entry.new(
-      title: params[:title],
-      description: params[:description],
-      posted_on: params[:posted_on],
-      place_id: params[:place_id]
-    )
-  
-    if @entry.save
-      redirect_to "/places/#{@entry.place_id}", notice: "Entry added successfully!"
-    else
-      flash[:alert] = "Error: Entry could not be saved. " + @entry.errors.full_messages.join(", ")
-      render :new
+    if @place.nil?
+      redirect_to places_path, alert: "Error: Place not found."
+      return
     end
+
+    @entry = @place.entries.build(entry_params)  
+    
+    if @entry.save
+      redirect_to place_path(@place), notice: "Entry added successfully!"
+    else
+      render :new, status: :unprocessable_entity  
+    end
+  end
+
+  private
+
+  def set_place
+    puts "Params received: #{params.inspect}"
+    @place = Place.find_by(id: params[:place_id])  
+    puts "Found Place: #{@place.inspect}" if @place
+    puts "Place not found!" if @place.nil?
+  end
+
+  def entry_params
+    params.require(:entry).permit(:title, :description, :posted_on) 
   end
 end

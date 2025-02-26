@@ -5,7 +5,8 @@
   <% if @entries.any? %>
     <% @entries.each do |entry| %>
       <li>
-        <strong><%= entry.title %></strong> - <%= entry.posted_on %>
+        <strong><%= entry.title %></strong> - 
+        <%= entry.posted_on.present? ? entry.posted_on.strftime("%B %d, %Y") : "No date provided" %>
         <p><%= entry.description %></p>
       </li>
     <% end %>
@@ -14,6 +15,7 @@
   <% end %>
 </ul>
 
-<%= link_to "Add New Entry", "/entries/new?place_id=#{@place.id}" %>
+
+<%= link_to "Add New Entry", new_place_entry_path(@place) %>
 <br>
 <%= link_to "Back to Places", "/places" %>
